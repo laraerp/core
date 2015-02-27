@@ -1,0 +1,30 @@
+{
+    "name": "laraerp/core",
+    "description": "LaraERP CORE",
+    "keywords": ["erp", "openerp", "erp php", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "laravel/framework": "5.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.cartalyst.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "Laraerp\\": "src/Laraerp"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
