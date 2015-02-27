@@ -11,9 +11,6 @@
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
-        "classmap": [
-            "database"
-        ],
         "psr-4": {
             "Laraerp\\": "src/Laraerp"
         }

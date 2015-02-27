@@ -5,8 +5,7 @@ namespace Laraerp\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
-use function redirect;
-use function view;
+
 
 class Permission implements Middleware {
 
