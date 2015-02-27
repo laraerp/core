@@ -6,8 +6,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
-use function redirect;
-use function response;
 
 class Authenticate implements Middleware {
 
@@ -36,6 +34,7 @@ class Authenticate implements Middleware {
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
