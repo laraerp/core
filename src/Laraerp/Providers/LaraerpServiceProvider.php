@@ -20,7 +20,7 @@ class LaraerpServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $back = DIRECTORY_SEPARATOR . '..';
-        $database = __DIR__ . $back . $back . $back . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR;
+        $database = __DIR__ . $back . $back . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR;
 
         $this->publishes([
             $database . 'migrations' => base_path('database/migrations'),
