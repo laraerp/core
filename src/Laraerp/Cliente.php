@@ -17,7 +17,7 @@ class Cliente extends Model {
      * Belongs to Pessoa
      */
     public function pessoa() {
-        return $this->belongsTo('Laraerp\Pessoa', 'fk_pessoa');
+        return $this->belongsTo('Laraerp\Pessoa');
     }
 
 }

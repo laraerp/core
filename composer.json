@@ -1,6 +1,6 @@
 {
     "name": "laraerp/core",
-    "description": "LaraERP CORE",
+    "description": "Laraerp CORE",
     "keywords": ["erp", "openerp", "erp php", "laravel"],
     "license": "MIT",
     "type": "project",
