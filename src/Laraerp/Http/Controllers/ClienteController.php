@@ -2,9 +2,18 @@
 
 namespace Laraerp\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Laraerp\Cliente;
 
 class ClienteController extends MainController {
+
+    protected $cliente;
+    protected $request;
+
+    public function __construct(Cliente $cliente, Request $request){
+        $this->cliente = $cliente;
+        $this->request = $request;
+    }
 
     /**
      * Lista de clientes
@@ -12,7 +21,20 @@ class ClienteController extends MainController {
      * @return Response
      */
     public function getIndex() {
-        $clientes = Cliente::paginate(15);
+
+        $order = $this->request->get('order', 'ASC');
+        $by = $this->request->get('by', 'pessoa.nome');
+
+        if(strpos($by, '.')){
+            $explode = explode('.', $by);
+            $this->cliente->load([$explode[0] => function($q) use ($explode, $order){
+                $q->orderBy($explode[1], $order);
+            }]) ;
+        }else
+            $this->cliente->orderBy($by, $order);
+
+        $clientes = $this->cliente->paginate(15);
+
         return view('cliente.index', compact('clientes'));
     }
     
