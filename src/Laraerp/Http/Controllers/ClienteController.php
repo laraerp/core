@@ -27,17 +27,18 @@ class ClienteController extends MainController {
 
         if(strpos($by, '.')){
             $explode = explode('.', $by);
-            $this->cliente->load([$explode[0] => function($q) use ($explode, $order){
-                $q->orderBy($explode[1], $order);
-            }]) ;
+            $relation = $this->cliente->{$explode[0]}();
+            $table = $relation->getRelated()->getTable();
+
+            $this->cliente = $this->cliente->join($table, $relation->getQualifiedForeignKey(), '=', $relation->getQualifiedOtherKeyName())->orderBy($table.'.'.$explode[1], $order);
         }else
-            $this->cliente->orderBy($by, $order);
+            $this->cliente = $this->cliente->orderBy($by, $order);
 
         $clientes = $this->cliente->paginate(15);
 
         return view('cliente.index', compact('clientes'));
     }
-    
+
     /**
      * Exibe formulário para criação de cliente
      *
@@ -46,7 +47,7 @@ class ClienteController extends MainController {
     public function getCreate() {
         return view('cliente.create');
     }
-    
+
     /**
      * Visualiza o cadastro do cliente
      *
@@ -62,7 +63,7 @@ class ClienteController extends MainController {
             return redirect()->back()->with('erro', $e->getMessage());
         }
     }
-    
+
     /**
      * Atualização Cliente
      *
@@ -79,7 +80,7 @@ class ClienteController extends MainController {
             return response()->json(array('codigo' => $e->getCode(), 'mensagem' => $e->getMessage()), 400);
         }
     }
-    
+
     /**
      * Exclusão de Cliente
      *
