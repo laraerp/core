@@ -4,7 +4,7 @@ namespace Laraerp\Http\Controllers;
 
 class DashboardController extends MainController {
 
-    public function getIndex() {
+    public function index() {
         return view('dashboard.index');
     }
 

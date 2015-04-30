@@ -20,21 +20,35 @@ class ClienteController extends MainController {
      *
      * @return Response
      */
-    public function getIndex() {
+    public function index() {
 
+        /*
+         * Order
+         */
         $order = $this->request->get('order', 'ASC');
         $by = $this->request->get('by', 'pessoa.nome');
 
-        if(strpos($by, '.')){
-            $explode = explode('.', $by);
-            $relation = $this->cliente->{$explode[0]}();
-            $table = $relation->getRelated()->getTable();
+        $builder = $this->cliente->orderBy($by, $order)->select('clientes.*');
 
-            $this->cliente = $this->cliente->join($table, $relation->getQualifiedForeignKey(), '=', $relation->getQualifiedOtherKeyName())->orderBy($table.'.'.$explode[1], $order);
-        }else
-            $this->cliente = $this->cliente->orderBy($by, $order);
 
-        $clientes = $this->cliente->paginate(15);
+        /*
+         * Filtrar LIKE
+         */
+        if($this->request->get('like')){
+
+            $builder = $builder->where(function($q) {
+
+                $q->orWhereHas('pessoa', function ($query) {
+                    $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
+                });
+                
+            });
+        }
+
+        /*
+         * Paginate
+         */
+        $clientes = $builder->paginate(15);
 
         return view('cliente.index', compact('clientes'));
     }
