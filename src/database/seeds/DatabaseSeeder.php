@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder {
          * Criando usuarios
          */
         User::create(['name' => 'Admin', 'email' => 'admin@admin.com', 'password' => Hash::make('admin')]);
+
+        /*
+         * Cidades
+         */
+        $this->call('CidadesSeeder');
     }
 
 }

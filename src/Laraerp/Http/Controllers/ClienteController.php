@@ -38,10 +38,14 @@ class ClienteController extends MainController {
 
             $builder = $builder->where(function($q) {
 
-                $q->orWhereHas('pessoa', function ($query) {
-                    $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
+                $q->whereHas('pessoa', function ($query) {
+                    $query->where(function($query){
+                        $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
+                        $query->orWhere('razao_apelido', 'like', '%' . $this->request->get('like') . '%');
+                        $query->orWhere('documento', 'like', '%' . $this->request->get('like') . '%');
+                    });
                 });
-                
+
             });
         }
 
@@ -58,8 +62,8 @@ class ClienteController extends MainController {
      *
      * @return Response
      */
-    public function getCreate() {
-        return view('cliente.create');
+    public function form() {
+        return view('cliente.form');
     }
 
     /**

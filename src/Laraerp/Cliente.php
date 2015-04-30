@@ -3,8 +3,11 @@
 namespace Laraerp;
 
 use Illuminate\Database\Eloquent\Model;
+use Laraerp\Ordination\OrdinationTrait;
 
 class Cliente extends Model {
+
+    use OrdinationTrait;
 
     protected $table = 'clientes';
     protected $fillable = ['nome', 'razao_apelido', 'documento', 'nascimento_fundacao'];
