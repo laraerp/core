@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Laraerp\User;
 
 class DatabaseSeeder extends Seeder {
 

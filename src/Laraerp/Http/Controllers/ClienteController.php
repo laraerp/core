@@ -67,6 +67,15 @@ class ClienteController extends MainController {
     }
 
     /**
+     * Cadastra um cliente
+     *
+     * @return Response
+     */
+    public function cadastrar() {
+        return redirect()->back()->with('erro', 'Erro teste')->withInput();
+    }
+
+    /**
      * Visualiza o cadastro do cliente
      *
      * @param  int $id
