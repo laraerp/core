@@ -17,7 +17,7 @@ class CreateEnderecosTable extends Migration {
 			$table->increments('id');
 
             $table->integer('pessoa_id')->unsigned();
-            $table->foreign('pessoa_id')->references('id')->on('pessoas');
+            $table->foreign('pessoa_id')->references('id')->on('pessoas')->onDelete('cascade');
 
             $table->string('cep', 8);
             $table->string('logradouro');

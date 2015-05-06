@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Laraerp\Cidade;
 use Laraerp\Cliente;
+use Laraerp\Contato;
 use Laraerp\Endereco;
 use Laraerp\Pessoa;
 
@@ -48,6 +49,17 @@ class InitSeeder extends Seeder {
             'numero' => 195,
             'bairro' => 'Sagrada Familia',
             'cidade_id' => $cidade->id
+        ]);
+
+        /*
+         * Criando um contato para a Pessoa01
+         */
+        Contato::create([
+            'pessoa_id' => $pessoa01->id,
+            'responsavel' => 'Contato 01',
+            'telefone' => '9988009090',
+            'celular' => '11970708080',
+            'email' => 'teste@teste.com'
         ]);
     }
 

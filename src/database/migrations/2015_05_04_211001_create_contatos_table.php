@@ -17,7 +17,7 @@ class CreateContatosTable extends Migration {
 			$table->increments('id');
 
             $table->integer('pessoa_id')->unsigned();
-            $table->foreign('pessoa_id')->references('id')->on('pessoas');
+            $table->foreign('pessoa_id')->references('id')->on('pessoas')->onDelete('cascade');
 
             $table->string('responsavel')->nullable();
             $table->string('telefone', 11)->nullable();
