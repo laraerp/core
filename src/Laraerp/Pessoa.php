@@ -3,6 +3,7 @@
 namespace Laraerp;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use JansenFelipe\Utils\Mask;
 use JansenFelipe\Utils\Utils;
@@ -71,7 +72,10 @@ class Pessoa extends Model {
     }
 
     public function setNascimentoFundacao($nascimento_fundacao){
-        if(!is_null($nascimento_fundacao) && strlen($nascimento_fundacao)>0)
-            $this->nascimento_fundacao = Carbon::createFromTimestamp(strtotime($nascimento_fundacao));
+        try{
+            $this->nascimento_fundacao = Carbon::createFromFormat('d/m/Y', $nascimento_fundacao);
+        }catch (Exception $e){
+            throw new Exception('Informe a data no formado DD/MM/YYYY');
+        }
     }
 }

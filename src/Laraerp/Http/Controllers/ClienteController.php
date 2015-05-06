@@ -57,7 +57,7 @@ class ClienteController extends MainController {
         /*
          * Paginate
          */
-        $clientes = $builder->paginate(15);
+        $clientes = $builder->paginate($this->request->get('limit', 15));
 
         return view('cliente.index', compact('clientes'));
     }
@@ -192,7 +192,7 @@ class ClienteController extends MainController {
     /**
      * Visualiza o cadastro do cliente
      *
-     * @param  int $id
+     * @param  Cliente $cliente
      * @return Response
      */
     public function ver(Cliente $cliente) {
@@ -200,31 +200,65 @@ class ClienteController extends MainController {
     }
 
     /**
-     * Atualização Cliente
+     * Edita o cadastro do cliente
      *
+     * @param  Cliente $cliente
      * @return Response
      */
-    public function postUpdate() {
+    public function editar(Cliente $cliente) {
         try {
-            $cliente = Cliente::findOrFail(Input::get('pk'));
-            $cliente->setAttribute(Input::get('name'), Input::get('value'));
-            if (!$cliente->save())
-                throw new Exception($cliente->errors()->first());
-            return response()->json(array('codigo' => 0, 'mensagem' => 'Atualizado com sucesso!'));
+
+            /*
+             * Validação
+             */
+            $this->validate($this->request, [
+                'nome' => 'required',
+                'documento' => 'required',
+            ]);
+
+            /*
+             * Verificando se pessoa já existe
+             */
+            $pessoa = Pessoa::where('documento', Utils::unmask($this->request->get('documento')))->first();
+
+            if(is_null($pessoa))
+                $pessoa = new Pessoa();
+
+            $pessoa->setNome($this->request->get('nome'));
+            $pessoa->setRazaoApelido($this->request->get('razao_apelido'));
+            $pessoa->setDocumento($this->request->get('documento'));
+            $pessoa->setNascimentoFundacao($this->request->get('nascimento_fundacao'));
+
+            /*
+             * Salvando pessoa
+             */
+            $pessoa->save();
+
+            $cliente->setPessoaId($pessoa->id);
+            $cliente->setInscricaoEstadual($this->request->get('inscricao_estatual'));
+            $cliente->setInscricaoMunicipal($this->request->get('inscricao_municipal'));
+            $cliente->setRetemIssqn($this->request->get('retem_issqn'));
+
+            /*
+             * Salvando cliente
+             */
+            $cliente->save();
+
+            return redirect()->back()->with('alert', 'Atualizado com sucesso!');
         } catch (Exception $e) {
-            return response()->json(array('codigo' => $e->getCode(), 'mensagem' => $e->getMessage()), 400);
+            return redirect()->back()->with('erro', $e->getMessage())->withInput();
         }
     }
 
     /**
      * Exclusão de Cliente
      *
-     * @param  int  $id
+     * @param  Cliente $cliente
      * @return Response
      */
-    public function getDelete($id) {
+    public function deletar(Cliente $cliente) {
         try {
-            Cliente::destroy($id);
+            $cliente->delete();
             return redirect()->back()->with('alert', 'Cliente excluido com sucesso!');
         } catch (Exception $e) {
             return redirect()->back()->with('erro', $e->getMessage());
