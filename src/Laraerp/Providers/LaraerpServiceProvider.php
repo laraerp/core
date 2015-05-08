@@ -38,6 +38,8 @@ class LaraerpServiceProvider extends ServiceProvider {
 
         $this->app->register('Laraerp\Providers\CidadesServiceProvider');
         $this->app->register('Laraerp\Providers\CorreiosServiceProvider');
+        $this->app->register('Laraerp\Providers\NcmsServiceProvider');
+        $this->app->register('Laraerp\Providers\CfopsServiceProvider');
 
     }
 
