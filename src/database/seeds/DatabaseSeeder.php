@@ -29,6 +29,16 @@ class DatabaseSeeder extends Seeder {
          * Cidades
          */
         $this->call('CidadesSeeder');
+
+        /*
+         * NCMs
+         */
+        $this->call('NcmsSeeder');
+
+        /*
+         * CFOPs
+         */
+        $this->call('CfopsSeeder');
     }
 
 }
