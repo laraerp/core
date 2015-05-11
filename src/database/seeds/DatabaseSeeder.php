@@ -39,6 +39,11 @@ class DatabaseSeeder extends Seeder {
          * CFOPs
          */
         $this->call('CfopsSeeder');
+
+        /*
+         * Unidades de Medida
+         */
+        $this->call('UnidadeMedidasSeeder');
     }
 
 }
