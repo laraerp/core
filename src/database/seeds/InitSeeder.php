@@ -7,10 +7,14 @@ use Laraerp\Cliente;
 use Laraerp\Contato;
 use Laraerp\Endereco;
 use Laraerp\Pessoa;
+use Laraerp\Produto;
 
 class InitSeeder extends Seeder {
 
 
+    /**
+     *
+     */
     public function run()
     {
         Model::unguard();
@@ -60,6 +64,15 @@ class InitSeeder extends Seeder {
             'telefone' => '9988009090',
             'celular' => '11970708080',
             'email' => 'teste@teste.com'
+        ]);
+
+        /*
+         * Criando um Produto
+         */
+        Produto::create([
+            'codigo' => 'COD0001',
+            'nome' => 'Produto 01',
+            'valor' => 10
         ]);
     }
 
