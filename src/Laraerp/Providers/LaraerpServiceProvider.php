@@ -34,9 +34,15 @@ class LaraerpServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        // Bind any implementations.
 
-        $this->app->register('Laraerp\Providers\CidadesServiceProvider');
+        /*
+         * Artesaos
+         */
+        $this->app->register('Artesaos\Providers\CidadesServiceProvider');
+
+        /*
+         * Laraerp
+         */
         $this->app->register('Laraerp\Providers\CorreiosServiceProvider');
         $this->app->register('Laraerp\Providers\NcmsServiceProvider');
         $this->app->register('Laraerp\Providers\CfopsServiceProvider');
