@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-use Laraerp\Cidade;
+use Artesaos\Cidade;
 use Laraerp\Cliente;
 use Laraerp\Contato;
 use Laraerp\Endereco;
