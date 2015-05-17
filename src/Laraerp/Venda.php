@@ -1,8 +1,11 @@
 <?php namespace Laraerp;
 
 use Illuminate\Database\Eloquent\Model;
+use Laraerp\Ordination\OrdinationTrait;
 
 class Venda extends Model {
+
+    use OrdinationTrait;
 
     protected $table = 'vendas';
 

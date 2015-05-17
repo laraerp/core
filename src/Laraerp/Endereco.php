@@ -25,7 +25,7 @@ class Endereco extends Model {
      * Belongs to Cidade
      */
     public function cidade() {
-        return $this->belongsTo('Laraerp\Cidade');
+        return $this->belongsTo('Artesaos\Cidade');
     }
 
     /**
