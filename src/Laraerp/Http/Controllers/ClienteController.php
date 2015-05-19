@@ -63,6 +63,37 @@ class ClienteController extends MainController {
     }
 
     /**
+     * Lista de clientes
+     *
+     * @return Response
+     */
+    public function buscarClientes() {
+
+        $builder = $this->cliente->orderBy('pessoa.nome', 'ASC')->select('pessoas.*');
+
+        /*
+         * Filtrar LIKE
+         */
+        if($this->request->get('like')){
+
+            $builder = $builder->where(function($q) {
+
+                $q->whereHas('pessoa', function ($query) {
+                    $query->where(function($query){
+                        $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
+                        $query->orWhere('documento', 'like', '%' . $this->request->get('like') . '%');
+                    });
+                });
+
+            });
+        }
+
+        $clientes = $builder->get();
+
+        return response()->json($clientes);
+    }
+
+    /**
      * Exibe formulário para criação de cliente
      *
      * @return Response

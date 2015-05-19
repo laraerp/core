@@ -3,6 +3,7 @@
 namespace Laraerp\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Laraerp\Cliente;
 use Laraerp\Venda;
 
 class VendaController extends MainController {
@@ -58,14 +59,77 @@ class VendaController extends MainController {
     }
 
     /**
-     * Visualiza a venda
-     *
+     * Exibe formulário para criação de venda
      *
      * @param  Cliente $cliente
      * @return Response
      */
-    public function ver(Cliente $cliente) {
-        return view('cliente.ver')->with(compact('cliente'));
+    public function form(Cliente $cliente) {
+        /*
+         * Order
+         */
+        $order = $this->request->get('order', 'ASC');
+        $by = $this->request->get('by', 'pessoa.nome');
+
+        $builder = $cliente->orderBy($by, $order)->select('clientes.*');
+
+
+        /*
+         * Filtrar LIKE
+         */
+        if($this->request->get('like')){
+
+            $builder = $builder->where(function($q) {
+
+                $q->whereHas('pessoa', function ($query) {
+                    $query->where(function($query){
+                        $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
+                        $query->orWhere('razao_apelido', 'like', '%' . $this->request->get('like') . '%');
+                        $query->orWhere('documento', 'like', '%' . $this->request->get('like') . '%');
+                    });
+                });
+
+            });
+        }
+
+        /*
+         * Paginate
+         */
+        $clientes = $builder->paginate($this->request->get('limit', 15));
+
+        return view('venda.form', compact('clientes'));
+
+    }
+
+    /**
+     * Cadastra uma venda
+     *
+     * @param  Cliente $cliente
+     * @return Response
+     */
+    public function cadastrar(Cliente $cliente)  {
+        try {
+
+            $venda = new Venda();
+            $venda->setClienteId($cliente->id);
+            $venda->save();
+
+            return redirect(route('venda.ver', $venda->id));
+
+        } catch (Exception $e) {
+            return redirect()->back()->with('erro', $e->getMessage())->withInput();
+        }
+    }
+
+    /**
+     * Visualiza a venda
+     *
+     *
+     * @param  Venda $venda
+     * @return Response
+     */
+    public function ver(Venda $venda) {
+        return view('venda.ver')->with(compact('venda'));
     }
 
     /**

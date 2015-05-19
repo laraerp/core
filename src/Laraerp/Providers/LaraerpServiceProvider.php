@@ -26,6 +26,8 @@ class LaraerpServiceProvider extends ServiceProvider {
             $database . 'migrations' => base_path('database/migrations'),
             $database . 'seeds' => base_path('database/seeds'),
         ]);
+
+        include __DIR__ . '/../Http/routes.php';
     }
 
     /**
