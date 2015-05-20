@@ -26,6 +26,13 @@ class Venda extends Model {
     }
 
     /**
+     * HasMany VendaItem
+     */
+    public function itens() {
+        return $this->belongsTo('Laraerp\VendaItem');
+    }
+
+    /**
      * Getters
      */
     public function getClienteId(){

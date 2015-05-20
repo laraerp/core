@@ -27,8 +27,8 @@ class CreateProdutosTable extends Migration {
             $table->integer('cfop_id')->nullable()->unsigned();
             $table->foreign('cfop_id')->references('id')->on('cfops')->onDelete('set null');
 
-            $table->integer('unidade_id')->nullable()->unsigned();
-            $table->foreign('unidade_id')->references('id')->on('unidades')->onDelete('set null');
+            $table->integer('unidade_id')->unsigned();
+            $table->foreign('unidade_id')->references('id')->on('unidades');
 
 			$table->timestamps();
 		});
