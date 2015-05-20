@@ -25,8 +25,8 @@ class CreateVendaItemsTable extends Migration {
             $table->text('descricao');
             $table->float('quantidade')->default(0);
 
-            $table->integer('unidade_id')->unsigned();
-            $table->foreign('unidade_id')->references('id')->on('unidades');
+            $table->integer('unidade_medida_id')->unsigned();
+            $table->foreign('unidade_medida_id')->references('id')->on('unidade_medidas');
 
             $table->float('valor_unitario')->default(0);
             $table->float('valor_bruto')->default(0);

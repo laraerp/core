@@ -72,6 +72,7 @@ class InitSeeder extends Seeder {
         Produto::create([
             'codigo' => 'COD0001',
             'nome' => 'Produto 01',
+            'unidade_id' => \Laraerp\Unidade::where('nome', 'Unitário')->first()->id,
             'valor' => 10
         ]);
     }

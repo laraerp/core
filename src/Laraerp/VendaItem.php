@@ -6,7 +6,7 @@ class VendaItem extends Model {
 
     protected $table = 'venda_items';
 
-    protected $fillable = ['venda_id', 'produto_id', 'descricao', 'valor_bruto', 'valor_desconto', 'valor_acrescimo', 'valor_liquido'];
+    protected $fillable = ['venda_id', 'produto_id', 'descricao', 'quantidade', 'unidade_medida', 'valor_bruto', 'valor_desconto', 'valor_acrescimo', 'valor_liquido'];
 
     /**
      * Belongs to Venda
