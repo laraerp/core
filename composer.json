@@ -14,7 +14,7 @@
         "laraerp/ncms": "1.0.*",
         "laraerp/cfops": "1.0.*",
         "laraerp/unidades-medida": "1.0.*",
-        "laraerp/tags": "dev-master"
+        "laraerp/tags": "1.0.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
