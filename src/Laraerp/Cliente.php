@@ -5,10 +5,11 @@ namespace Laraerp;
 use Illuminate\Database\Eloquent\Model;
 use JansenFelipe\Utils\Utils;
 use Laraerp\Ordination\OrdinationTrait;
+use Laraerp\Tag\TagTrait;
 
 class Cliente extends Model {
 
-    use OrdinationTrait;
+    use OrdinationTrait, TagTrait;
 
     protected $table = 'clientes';
 

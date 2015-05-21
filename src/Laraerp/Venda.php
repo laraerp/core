@@ -29,7 +29,7 @@ class Venda extends Model {
      * HasMany VendaItem
      */
     public function itens() {
-        return $this->belongsTo('Laraerp\VendaItem');
+        return $this->hasMany('Laraerp\VendaItem');
     }
 
     /**
