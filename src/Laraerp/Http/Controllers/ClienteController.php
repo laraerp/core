@@ -9,14 +9,17 @@ use Laraerp\Cliente;
 use Laraerp\Contato;
 use Laraerp\Endereco;
 use Laraerp\Pessoa;
+use Laraerp\Tag;
 
 class ClienteController extends MainController {
 
     protected $cliente;
+    protected $tag;
     protected $request;
 
-    public function __construct(Cliente $cliente, Request $request){
+    public function __construct(Cliente $cliente, Tag $tag, Request $request){
         $this->cliente = $cliente;
+        $this->tag = $tag;
         $this->request = $request;
     }
 
@@ -59,7 +62,12 @@ class ClienteController extends MainController {
          */
         $clientes = $builder->paginate($this->request->get('limit', 15));
 
-        return view('cliente.index', compact('clientes'));
+        /*
+         * Listando Tags de Clientes
+         */
+        $tags = $this->tag->where('tabela', 'clientes')->distinct()->get(['nome']);
+
+        return view('cliente.index', compact('clientes', 'tags'));
     }
 
     /**
