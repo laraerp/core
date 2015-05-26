@@ -19,16 +19,10 @@ class CreateProdutosTable extends Migration {
             $table->string('codigo', 60)->unique();
             $table->string('nome', 120);
 
-            $table->float('valor');
+            $table->float('valor_unitario')->default(0);
 
-            $table->integer('ncm_id')->nullable()->unsigned();
-            $table->foreign('ncm_id')->references('id')->on('pessoas')->onDelete('set null');
-
-            $table->integer('cfop_id')->nullable()->unsigned();
-            $table->foreign('cfop_id')->references('id')->on('cfops')->onDelete('set null');
-
-            $table->integer('unidade_id')->unsigned();
-            $table->foreign('unidade_id')->references('id')->on('unidades');
+            $table->integer('unidade_medida_id')->unsigned();
+            $table->foreign('unidade_medida_id')->references('id')->on('unidade_medidas');
 
 			$table->timestamps();
 		});

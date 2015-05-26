@@ -11,8 +11,6 @@
         "jansenfelipe/cep-gratis": "2.0.*@dev",
         "artesaos/cidadesbr": "1.0.*",
         "laraerp/correios": "1.0.*",
-        "laraerp/ncms": "1.0.*",
-        "laraerp/cfops": "1.0.*",
         "laraerp/unidades-medida": "1.0.*",
         "laraerp/tags": "1.0.*"
     },

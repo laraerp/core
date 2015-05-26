@@ -11,21 +11,8 @@ class Produto extends Model {
 
     protected $table = 'produtos';
 
-    protected $fillable = ['codigo', 'nome', 'valor', 'ncm_id', 'cfop_id', 'unidade_id'];
+    protected $fillable = ['codigo', 'nome', 'valor', 'unidade_id'];
 
-    /**
-     * Belongs to NCM
-     */
-    public function ncm() {
-        return $this->belongsTo('Laraerp\Ncm');
-    }
-
-    /**
-     * Belongs to CFOP
-     */
-    public function cfop() {
-        return $this->belongsTo('Laraerp\Cfop');
-    }
 
     /**
      * Belongs to Unidade
@@ -49,14 +36,6 @@ class Produto extends Model {
         return $this->valor;
     }
 
-    public function getNcmId(){
-        return $this->ncm_id;
-    }
-
-    public function getCfopId(){
-        return $this->cfop_id;
-    }
-
     public function getUnidadeId(){
         return $this->unidade_id;
     }
@@ -74,14 +53,6 @@ class Produto extends Model {
 
     public function setValor($valor){
         $this->valor = $valor;
-    }
-
-    public function setNcmId($ncm_id){
-        $this->ncm_id = $ncm_id;
-    }
-
-    public function setCfopId($cfop_id){
-        $this->cfop_id = $cfop_id;
     }
 
     public function setUnidadeId($unidade_id){

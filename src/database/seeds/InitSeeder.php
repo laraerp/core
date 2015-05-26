@@ -72,8 +72,15 @@ class InitSeeder extends Seeder {
         Produto::create([
             'codigo' => 'COD0001',
             'nome' => 'Produto 01',
-            'unidade_id' => \Laraerp\Unidade::where('nome', 'Unitário')->first()->id,
-            'valor' => 10
+            'unidade_medida_id' => \Laraerp\UnidadeMedida::where('simbolo', 'Un')->first()->id,
+            'valor_unitario' => 10
+        ]);
+
+        Produto::create([
+            'codigo' => 'COD0002',
+            'nome' => 'Produto 02',
+            'unidade_medida_id' => \Laraerp\UnidadeMedida::where('simbolo', 'Kg')->first()->id,
+            'valor_unitario' => 140
         ]);
     }
 
