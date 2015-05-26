@@ -31,17 +31,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('CidadesSeeder');
 
         /*
-         * NCMs
-         */
-        $this->call('NcmsSeeder');
-
-        /*
-         * CFOPs
-         */
-        $this->call('CfopsSeeder');
-
-        /*
-         * Unidades de Medida
+	 * Unidades de Medida
          */
         $this->call('UnidadeMedidasSeeder');
     }

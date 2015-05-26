@@ -3,6 +3,7 @@
 namespace Laraerp;
 
 use Illuminate\Database\Eloquent\Model;
+use JansenFelipe\Utils\Utils;
 use Laraerp\Ordination\OrdinationTrait;
 
 class Produto extends Model {
@@ -11,14 +12,14 @@ class Produto extends Model {
 
     protected $table = 'produtos';
 
-    protected $fillable = ['codigo', 'nome', 'valor', 'unidade_id'];
+    protected $fillable = ['codigo', 'nome', 'valor_unitario', 'unidade_medida_id'];
 
 
     /**
-     * Belongs to Unidade
+     * Belongs to UnidadeMedida
      */
-    public function unidade() {
-        return $this->belongsTo('Laraerp\Unidade');
+    public function unidadeMedida() {
+        return $this->belongsTo('Laraerp\UnidadeMedida');
     }
 
     /**
@@ -32,12 +33,12 @@ class Produto extends Model {
         return $this->nome;
     }
 
-    public function getValor(){
-        return $this->valor;
+    public function getValorUnitario(){
+        return Utils::moeda($this->valor_unitario);
     }
 
-    public function getUnidadeId(){
-        return $this->unidade_id;
+    public function getUnidadeMedidaId(){
+        return $this->unidade_medida_id;
     }
 
     /**
@@ -51,12 +52,12 @@ class Produto extends Model {
         $this->nome = $nome;
     }
 
-    public function setValor($valor){
-        $this->valor = $valor;
+    public function setValorUnitario($valor_unitario){
+        $this->valor_unitario = $valor_unitario;
     }
 
-    public function setUnidadeId($unidade_id){
-        $this->unidade_id = $unidade_id;
+    public function setUnidadeMedidaId($unidade_medida_id){
+        $this->unidade_medida_id = $unidade_medida_id;
     }
 
 

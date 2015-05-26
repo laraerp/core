@@ -5,6 +5,7 @@ namespace Laraerp\Http\Controllers;
 use Illuminate\Http\Request;
 use Laraerp\Cliente;
 use Laraerp\Produto;
+use Laraerp\Unidade;
 use Laraerp\Venda;
 use Laraerp\VendaItem;
 
@@ -43,7 +44,12 @@ class VendaItemController extends MainController {
          */
         $produtos = $builder->paginate($this->request->get('limit', 15));
 
-        return view('vendaItem.form', compact('produtos', 'venda'));
+        /*
+         * Carregando unidades de medida
+         */
+        $unidades = Unidade::with('unidadeMedidas')->get();
+
+        return view('vendaItem.form', compact('produtos', 'venda', 'unidades'));
 
     }
 
