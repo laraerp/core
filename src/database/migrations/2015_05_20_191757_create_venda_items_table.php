@@ -22,12 +22,12 @@ class CreateVendaItemsTable extends Migration {
             $table->integer('produto_id')->nullable()->unsigned();
             $table->foreign('produto_id')->references('id')->on('produtos');
 
-            $table->text('descricao');
-            $table->float('quantidade')->default(0);
-
             $table->integer('unidade_medida_id')->unsigned();
             $table->foreign('unidade_medida_id')->references('id')->on('unidade_medidas');
 
+            $table->text('codigo');
+            $table->text('descricao');
+            $table->float('quantidade')->default(0);
             $table->float('valor_unitario')->default(0);
             $table->float('valor_bruto')->default(0);
             $table->float('valor_desconto')->default(0);

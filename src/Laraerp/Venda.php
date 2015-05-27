@@ -1,6 +1,7 @@
 <?php namespace Laraerp;
 
 use Illuminate\Database\Eloquent\Model;
+use JansenFelipe\Utils\Utils;
 use Laraerp\Ordination\OrdinationTrait;
 
 class Venda extends Model {
@@ -44,19 +45,19 @@ class Venda extends Model {
     }
 
     public function getValorBruto(){
-        return $this->valor_bruto;
+        return Utils::moeda($this->valor_bruto);
     }
 
     public function getValorDesconto(){
-        return $this->valor_desconto;
+        return Utils::moeda($this->valor_desconto);
     }
 
     public function getValorAcrescimo(){
-        return $this->valor_acrescimo;
+        return Utils::moeda($this->valor_acrescimo);
     }
 
     public function getValorLiquido(){
-        return $this->valor_liquido;
+        return Utils::moeda($this->valor_liquido);
     }
 
     /**
