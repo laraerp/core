@@ -31,7 +31,7 @@ interface Repository {
     public function paginate($limit = null, array $columns = array('*'));
 
     /**
-     * Remove a entity in repository
+     * Sets ordination to the list
      *
      * @param null $by
      * @param null $order

@@ -21,6 +21,19 @@ class PessoaEloquentModel extends Model implements PessoaModel {
     }
 
     /**
+     * HasMany to Endereco
+     */
+    public function enderecos() {
+        return $this->hasMany('Laraerp\Models\Eloquent\EnderecoEloquentModel', 'pessoa_id', 'id');
+    }
+    /**
+     * HasMany to Contato
+     */
+    public function contatos() {
+        return $this->hasMany('Laraerp\Models\Eloquent\ContatoEloquentModel', 'pessoa_id', 'id');
+    }
+
+    /**
      * Set identification
      *
      * @param int $id
@@ -139,4 +152,23 @@ class PessoaEloquentModel extends Model implements PessoaModel {
         return $this->nascimento_fundacao->format('d/m/Y');
     }
 
+    /**
+     * Get Endereços
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getEnderecos()
+    {
+        return $this->enderecos;
+    }
+
+    /**
+     * Get Contatos
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getContatos()
+    {
+        return $this->contatos;
+    }
 }

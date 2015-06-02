@@ -1,12 +1,12 @@
 <?php
 
-namespace Laraerp;
+namespace Laraerp\Models\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use JansenFelipe\Utils\Mask;
 use JansenFelipe\Utils\Utils;
 
-class Contato extends Model {
+class ContatoEloquentModel extends Model {
 
     protected $table = 'contatos';
 

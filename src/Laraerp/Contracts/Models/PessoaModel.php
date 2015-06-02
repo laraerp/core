@@ -65,4 +65,18 @@ interface PessoaModel extends Model {
      */
     public function getNascimentoFundacao();
 
+    /**
+     * Get Endereços
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getEnderecos();
+
+    /**
+     * Get Contatos
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getContatos();
+
 }

@@ -40,7 +40,7 @@ class ClienteEloquentModel extends Model implements ClienteModel {
      */
     public function setPessoa(PessoaModel $pessoa)
     {
-        $this->pessoa = $pessoa;
+        $this->pessoa_id = $pessoa->getId();
 
         return $this;
     }

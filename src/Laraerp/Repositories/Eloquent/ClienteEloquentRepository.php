@@ -96,7 +96,7 @@ class ClienteEloquentRepository implements ClienteRepository{
      */
     public function getById($id)
     {
-        // TODO: Implement getById() method.
+        return $this->cliente->find($id);
     }
 
     /**

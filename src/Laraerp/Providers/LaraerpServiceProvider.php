@@ -38,12 +38,18 @@ class LaraerpServiceProvider extends ServiceProvider {
     public function register() {
 
         /*
-         * Core Binding
+         * Binding Repositories
          */
         $this->app->bind('Laraerp\Contracts\Repositories\PessoaRepository', 'Laraerp\Repositories\Eloquent\PessoaEloquentRepository');
         $this->app->bind('Laraerp\Contracts\Repositories\ClienteRepository', 'Laraerp\Repositories\Eloquent\ClienteEloquentRepository');
+
+        /*
+         * Binding Models
+         */
         $this->app->bind('Laraerp\Contracts\Models\PessoaModel', 'Laraerp\Models\Eloquent\PessoaEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\ClienteModel', 'Laraerp\Models\Eloquent\ClienteEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\EnderecoModel', 'Laraerp\Models\Eloquent\EnderecoEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\CidadeModel', 'Laraerp\Models\Eloquent\CidadeEloquentModel');
 
         /*
          * Artesaos
