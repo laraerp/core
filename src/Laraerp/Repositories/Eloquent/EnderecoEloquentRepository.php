@@ -83,17 +83,25 @@ class EnderecoEloquentRepository implements EnderecoRepository{
         if(isset($params['id']) && $params['id']>0)
             $this->endereco = $this->endereco->find($params['id']);
 
+        /*
+         * Verificando se foi informado pessoa_id para vincular ao endereço.
+         * Caso contrário, insere uma pessoa.
+         */
+        if(isset($params['pessoa_id']))
+            $this->endereco->setPessoa($this->pessoaRepository->getById($params['pessoa_id']));
+        else
+            $this->endereco->setPessoa($this->pessoaRepository->save($params));
+
+
         if(isset($params['complemento']))
             $this->endereco->setComplemento($params['complemento']);
 
-        if(isset($params['pessoa_id']))
-            $this->endereco->setPessoa($this->pessoaRepository->getById($params['pessoa_id']));
 
         $this->endereco->setCep($params['cep']);
         $this->endereco->setLogradouro($params['logradouro']);
         $this->endereco->setNumero($params['numero']);
         $this->endereco->setBairro($params['bairro']);
-        $this->endereco->setCidade($this->pessoaRepository->getById($params['cidade_id']));
+        $this->endereco->setCidade($this->cidadeRepository->getById($params['cidade_id']));
 
         /*
          * Salvando

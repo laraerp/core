@@ -70,7 +70,7 @@ class ClienteEloquentRepository implements ClienteRepository{
      */
     public function paginate($limit = null, array $columns = array('*'))
     {
-        return $this->cliente->paginate($limit, $columns);
+        return $this->cliente->select('clientes.*')->paginate($limit, $columns);
     }
 
     /**
@@ -109,17 +109,16 @@ class ClienteEloquentRepository implements ClienteRepository{
     {
         if(isset($params['id']) && $params['id']>0)
             $this->cliente = $this->cliente->find($params['id']);
-        else{
-            $pessoa = $this->pessoaRepository->save($params);
 
-            /*
-             * Verificando se a pessoa já é um cliente
-             */
-            if(!is_null($pessoa->cliente))
-                $this->cliente = $pessoa->cliente;
-            else
-                $this->cliente->setPessoa($pessoa);
-        }
+        /*
+         * Verificando se foi informado pessoa_id para vincular ao cliente.
+         * Caso contrário, insere uma pessoa.
+         */
+        if(isset($params['pessoa_id']))
+            $this->cliente->setPessoa($this->pessoaRepository->getById($params['pessoa_id']));
+        else
+            $this->cliente->setPessoa($this->pessoaRepository->save($params));
+
 
         if(isset($params['inscricao_estatual']))
             $this->cliente->setInscricaoEstadual($params['inscricao_estadual']);
