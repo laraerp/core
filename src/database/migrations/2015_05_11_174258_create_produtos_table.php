@@ -17,12 +17,10 @@ class CreateProdutosTable extends Migration {
 			$table->increments('id');
 
             $table->string('codigo', 60)->unique();
-            $table->string('nome', 120);
+            $table->string('descricao', 120);
 
-            $table->float('valor_unitario')->default(0);
-
-            $table->integer('unidade_medida_id')->unsigned();
-            $table->foreign('unidade_medida_id')->references('id')->on('unidade_medidas');
+            $table->integer('unidade_id')->unsigned();
+            $table->foreign('unidade_id')->references('id')->on('unidades');
 
 			$table->timestamps();
 		});

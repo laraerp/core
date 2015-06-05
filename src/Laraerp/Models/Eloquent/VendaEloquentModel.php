@@ -1,6 +1,7 @@
 <?php namespace Laraerp\Models\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use JansenFelipe\Utils\Utils;
 use Laraerp\Contracts\Models\ClienteModel;
 use Laraerp\Contracts\Models\EnderecoModel;
 use Laraerp\Contracts\Models\VendaModel;
@@ -30,7 +31,7 @@ class VendaEloquentModel extends Model implements VendaModel{
      * HasMany VendaItem
      */
     public function itens() {
-        return $this->hasMany('Laraerp\VendaItem');
+        return $this->hasMany('Laraerp\Models\Eloquent\VendaItemEloquentModel', 'venda_id', 'id');
     }
 
     /**
@@ -80,7 +81,7 @@ class VendaEloquentModel extends Model implements VendaModel{
      */
     public function setValorFrete($valor_frete)
     {
-        $this->valor_frete = $valor_frete;
+        $this->valor_frete = Utils::unmoeda($valor_frete);
 
         return $this;
     }
@@ -93,7 +94,7 @@ class VendaEloquentModel extends Model implements VendaModel{
      */
     public function setValorTotal($valor_total)
     {
-        $this->valor_total = $valor_total;
+        $this->valor_total = Utils::unmoeda($valor_total);
 
         return $this;
     }
@@ -135,7 +136,7 @@ class VendaEloquentModel extends Model implements VendaModel{
      */
     public function getValorFrete()
     {
-        return $this->valor_frete;
+        return Utils::moeda($this->valor_frete);
     }
 
     /**
@@ -145,7 +146,7 @@ class VendaEloquentModel extends Model implements VendaModel{
      */
     public function getValorTotal()
     {
-        return $this->valor_total;
+        return Utils::moeda($this->valor_total);
     }
 
     /**

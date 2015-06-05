@@ -80,7 +80,7 @@ class ClienteController extends MainController {
     }
 
     /**
-     * Cadastra um cliente
+     * Visualiza um cliente
      *
      * @return Response
      */

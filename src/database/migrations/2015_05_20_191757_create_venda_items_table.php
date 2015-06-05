@@ -29,10 +29,9 @@ class CreateVendaItemsTable extends Migration {
             $table->text('descricao');
             $table->float('quantidade')->default(0);
             $table->float('valor_unitario')->default(0);
-            $table->float('valor_bruto')->default(0);
             $table->float('valor_desconto')->default(0);
             $table->float('valor_acrescimo')->default(0);
-            $table->float('valor_liquido')->default(0);
+            $table->float('valor_total')->default(0);
 
 			$table->timestamps();
 		});

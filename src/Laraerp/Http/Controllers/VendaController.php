@@ -5,15 +5,17 @@ namespace Laraerp\Http\Controllers;
 use Illuminate\Http\Request;
 use Laraerp\Cliente;
 use Laraerp\Contracts\Repositories\ClienteRepository;
+use Laraerp\Contracts\Repositories\ProdutoRepository;
 use Laraerp\Contracts\Repositories\VendaRepository;
 use Laraerp\Venda;
 
 class VendaController extends MainController {
 
 
-    public function __construct(VendaRepository $vendaRepository, ClienteRepository $clienteRepository, Request $request){
+    public function __construct(VendaRepository $vendaRepository, ClienteRepository $clienteRepository, ProdutoRepository $produtoRepository, Request $request){
         $this->vendaRepository = $vendaRepository;
         $this->clienteRepository = $clienteRepository;
+        $this->produtoRepository = $produtoRepository;
         $this->request = $request;
     }
 
@@ -51,17 +53,19 @@ class VendaController extends MainController {
     }
 
     /**
-     * Cadastra uma venda
+     * Cadastra uma venda para um Cliente
      *
-     * @param  Cliente $cliente
+     * @param  int $idCliente
      * @return Response
      */
-    public function cadastrar(Cliente $cliente)  {
+    public function cadastrar($idCliente)  {
         try {
 
-            $venda = new Venda();
-            $venda->setClienteId($cliente->id);
-            $venda->save();
+            $cliente = $this->clienteRepository->getById($idCliente);
+
+            $venda = $this->vendaRepository->save([
+                'cliente_id' => $cliente->getId()
+            ]);
 
             return redirect(route('venda.ver', $venda->id));
 
@@ -73,26 +77,55 @@ class VendaController extends MainController {
     /**
      * Visualiza a venda
      *
-     *
-     * @param  Venda $venda
+     * @param  int $idVenda
      * @return Response
      */
-    public function ver(Venda $venda) {
-        return view('venda.ver')->with(compact('venda'));
+    public function ver($idVenda) {
+        try{
+            $venda = $this->vendaRepository->getById($idVenda);
+
+            return view('venda.ver')->with(compact('venda'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('erro', $e->getMessage())->withInput();
+        }
     }
 
     /**
-     * Exclusão de Cliente
+     * Exclusão de Venda
      *
-     * @param  Cliente $cliente
+     * @param  int $idVenda
      * @return Response
      */
-    public function deletar(Cliente $cliente) {
+    public function deletar($idVenda) {
         try {
-            $cliente->delete();
-            return redirect()->back()->with('alert', 'Cliente excluido com sucesso!');
+            $this->vendaRepository->remove($idVenda);
+
+            return redirect()->back()->with('alert', 'Venda excluida com sucesso!');
         } catch (Exception $e) {
             return redirect()->back()->with('erro', $e->getMessage());
+        }
+    }
+
+    /**
+     * Formulario para adição de item na venda
+     *
+     * @param  int $idVenda
+     * @return Response
+     */
+    public function adicionarItem($idVenda) {
+        try{
+            $venda = $this->vendaRepository->getById($idVenda);
+
+            $like = $this->request->get('like');
+            $order = $this->request->get('order', 'ASC');
+            $by = $this->request->get('by', 'descricao');
+
+            $produtos = $this->produtoRepository->order($by, $order)->whereLike($like)->all();
+
+
+            return view('venda.adicionarItem')->with(compact('venda', 'produtos'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('erro', $e->getMessage())->withInput();
         }
     }
 

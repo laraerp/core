@@ -26,6 +26,7 @@ class PessoaEloquentModel extends Model implements PessoaModel {
     public function enderecos() {
         return $this->hasMany('Laraerp\Models\Eloquent\EnderecoEloquentModel', 'pessoa_id', 'id');
     }
+
     /**
      * HasMany to Contato
      */

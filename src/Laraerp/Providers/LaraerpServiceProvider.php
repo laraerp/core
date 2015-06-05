@@ -53,7 +53,10 @@ class LaraerpServiceProvider extends ServiceProvider {
         $this->app->bind('Laraerp\Contracts\Repositories\CidadeRepository', 'Laraerp\Repositories\Eloquent\CidadeEloquentRepository');
         $this->app->bind('Laraerp\Contracts\Repositories\ContatoRepository', 'Laraerp\Repositories\Eloquent\ContatoEloquentRepository');
         $this->app->bind('Laraerp\Contracts\Repositories\ClienteRepository', 'Laraerp\Repositories\Eloquent\ClienteEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\ProdutoRepository', 'Laraerp\Repositories\Eloquent\ProdutoEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\UnidadeRepository', 'Laraerp\Repositories\Eloquent\UnidadeEloquentRepository');
         $this->app->bind('Laraerp\Contracts\Repositories\VendaRepository', 'Laraerp\Repositories\Eloquent\VendaEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\VendaItemRepository', 'Laraerp\Repositories\Eloquent\VendaItemEloquentRepository');
 
         /*
          * Binding Models
@@ -63,7 +66,10 @@ class LaraerpServiceProvider extends ServiceProvider {
         $this->app->bind('Laraerp\Contracts\Models\CidadeModel', 'Laraerp\Models\Eloquent\CidadeEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\ContatoModel', 'Laraerp\Models\Eloquent\ContatoEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\ClienteModel', 'Laraerp\Models\Eloquent\ClienteEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\ProdutoModel', 'Laraerp\Models\Eloquent\ProdutoEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\UnidadeModel', 'Laraerp\Models\Eloquent\UnidadeEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\VendaModel', 'Laraerp\Models\Eloquent\VendaEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\VendaItemModel', 'Laraerp\Models\Eloquent\VendaItemEloquentModel');
 
         /*
          * Artesaos

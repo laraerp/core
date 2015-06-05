@@ -4,8 +4,11 @@ use Laraerp\Contracts\Criteria;
 use Laraerp\Contracts\Models\ClienteModel;
 use Laraerp\Contracts\Repositories\ClienteRepository;
 use Laraerp\Contracts\Repositories\PessoaRepository;
+use Laraerp\Ordination\OrdinationTrait;
 
 class ClienteEloquentRepository implements ClienteRepository{
+
+    use OrdinationTrait;
 
     /**
      * Constructor

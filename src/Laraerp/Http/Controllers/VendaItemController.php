@@ -24,43 +24,6 @@ class VendaItemController extends MainController {
     }
 
     /**
-     * Exibe formulário para adição de item na Venda
-     *
-     * @param  Venda $cliente
-     * @return Response
-     */
-    public function form(Venda $venda, Produto $produto) {
-        /*
-         * Order
-         */
-        $order = $this->request->get('order', 'ASC');
-        $by = $this->request->get('by', 'nome');
-
-        $builder = $produto->orderBy($by, $order)->select('produtos.*');
-
-
-        /*
-         * Filtrar LIKE
-         */
-        if($this->request->get('like'))
-            $builder = $builder->where('nome', 'like', '%' . $this->request->get('like') . '%');
-
-
-        /*
-         * Paginate
-         */
-        $produtos = $builder->paginate($this->request->get('limit', 15));
-
-        /*
-         * Carregando unidades de medida
-         */
-        $unidades = Unidade::with('unidadeMedidas')->get();
-
-        return view('vendaItem.form', compact('produtos', 'venda', 'unidades'));
-
-    }
-
-    /**
      * Adicionar um item na Venda
      *
      * @return Response
