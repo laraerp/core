@@ -12,7 +12,7 @@ class ClienteEloquentRepository implements ClienteRepository{
      *
      * @param ClienteModel $cliente
      */
-    function __construct(ClienteModel $cliente, PessoaRepository $pessoaRepository)
+    function __construct(ClienteModel $cliente,PessoaRepository $pessoaRepository)
     {
         $this->cliente = $cliente;
         $this->pessoaRepository = $pessoaRepository;
@@ -20,9 +20,7 @@ class ClienteEloquentRepository implements ClienteRepository{
 
 
     /**
-     * Aplica um filtro para retornar apenas clientes
-     * que possui Nome, Razão Social ou Documento com
-     * a string $like
+     * Aplica condição $like nos campos Nome, Razão Social e Documento
      *
      * @param null $like
      * @return \Laraerp\Contracts\Repositories\ClienteRepository
@@ -48,21 +46,9 @@ class ClienteEloquentRepository implements ClienteRepository{
         return $this;
     }
 
-    /**
-     * Retrieve data of repository
-     *
-     * @param array $columns
-     * @param null $limit
-     * @param null $offset
-     * @return \Illuminate\Support\Collection
-     */
-    public function retrieve(array $columns = array('*'), $limit = null, $offset = null)
-    {
-        return $this->cliente->get();
-    }
 
     /**
-     * Retrieve all data of repository, paginated
+     * Retorna uma coleção de Clientes com paginação
      *
      * @param null $limit
      * @param array $columns
@@ -74,11 +60,11 @@ class ClienteEloquentRepository implements ClienteRepository{
     }
 
     /**
-     * Remove a entity in repository
+     * Aplica ordenação
      *
      * @param null $by
      * @param null $order
-     * @return \Laraerp\Contracts\Repository
+     * @return \Laraerp\Contracts\Repositories\ClienteRepository
      */
     public function order($by = null, $order = null)
     {
@@ -89,10 +75,10 @@ class ClienteEloquentRepository implements ClienteRepository{
     }
 
     /**
-     * Returns a specific model by identifier
+     * Retorna um Cliente
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\ClienteModel
      */
     public function getById($id)
     {
@@ -100,27 +86,48 @@ class ClienteEloquentRepository implements ClienteRepository{
     }
 
     /**
-     * Save data in repository
+     * Salva um Cliente no repositório
      *
      * @param array $params
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\ClienteModel
      */
     public function save(array $params)
     {
-        if(isset($params['id']) && $params['id']>0)
+        if(isset($params['id']) && $params['id']>0) {
             $this->cliente = $this->cliente->find($params['id']);
+            unset($params['id']);
+        }
 
         /*
-         * Verificando se foi informado pessoa_id para vincular ao cliente.
-         * Caso contrário, insere uma pessoa.
+         * Verificando se existe uma Pessoa com o "pessoa_id" ou "documento" informado
          */
+        $pessoa = null;
+
         if(isset($params['pessoa_id']))
-            $this->cliente->setPessoa($this->pessoaRepository->getById($params['pessoa_id']));
-        else
+            $pessoa = $this->pessoaRepository->getById($params['pessoa_id']);
+        else if(isset($params['documento']))
+            $pessoa = $this->pessoaRepository->getByDocumento($params['documento']);
+
+
+        /*
+         * Verificando se encontrou a pessoa..
+         * Se não encontrar, tenta criar uma
+         */
+        if(!is_null($pessoa)){
+            $cliente = $pessoa->getCliente();
+
+            /*
+             * Verificando se a pessoa ja é um cliente
+             */
+            if(!is_null($cliente))
+                $this->cliente = $cliente;
+            else
+                $this->cliente->setPessoa($pessoa);
+        }else
             $this->cliente->setPessoa($this->pessoaRepository->save($params));
 
 
-        if(isset($params['inscricao_estatual']))
+        if(isset($params['inscricao_estadual']))
             $this->cliente->setInscricaoEstadual($params['inscricao_estadual']);
 
         if(isset($params['inscricao_municipal']))
@@ -135,5 +142,16 @@ class ClienteEloquentRepository implements ClienteRepository{
         $this->cliente->save();
 
         return $this->cliente;
+    }
+
+    /**
+     * Remove Cliente do repositorio
+     *
+     * @param int $id
+     * @return boolean
+     */
+    public function remove($id)
+    {
+        return $this->getById($id)->delete();
     }
 }

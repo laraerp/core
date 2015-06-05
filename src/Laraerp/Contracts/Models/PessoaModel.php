@@ -1,9 +1,15 @@
 <?php namespace Laraerp\Contracts\Models;
 
-use Carbon\Carbon;
-use Laraerp\Contracts\Model;
 
-interface PessoaModel extends Model {
+interface PessoaModel{
+
+    /**
+     * Set identification
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setId($id);
 
     /**
      * Set Nome
@@ -36,6 +42,13 @@ interface PessoaModel extends Model {
      * @return \Laraerp\Contracts\Models\PessoaModel
      */
     public function setNascimentoFundacao($nascimento_fundacao);
+
+    /**
+     * Get identification
+     *
+     * @return int
+     */
+    public function getId();
 
     /**
      * Get Nome
@@ -78,5 +91,12 @@ interface PessoaModel extends Model {
      * @return \Illuminate\Support\Collection
      */
     public function getContatos();
+
+    /**
+     * Get Cliente
+     *
+     * @return \Laraerp\Contracts\Models\ClienteModel
+     */
+    public function getCliente();
 
 }

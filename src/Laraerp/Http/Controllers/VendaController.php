@@ -4,15 +4,16 @@ namespace Laraerp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laraerp\Cliente;
+use Laraerp\Contracts\Repositories\ClienteRepository;
+use Laraerp\Contracts\Repositories\VendaRepository;
 use Laraerp\Venda;
 
 class VendaController extends MainController {
 
-    protected $venda;
-    protected $request;
 
-    public function __construct(Venda $venda, Request $request){
-        $this->venda = $venda;
+    public function __construct(VendaRepository $vendaRepository, ClienteRepository $clienteRepository, Request $request){
+        $this->vendaRepository = $vendaRepository;
+        $this->clienteRepository = $clienteRepository;
         $this->request = $request;
     }
 
@@ -23,79 +24,27 @@ class VendaController extends MainController {
      */
     public function index() {
 
-        /*
-         * Order
-         */
-        $order = $this->request->get('order', 'DESC');
-        $by = $this->request->get('by', 'id');
+        $like = $this->request->get('like');
+        $order = $this->request->get('order', 'ASC');
+        $by = $this->request->get('by', 'cliente.pessoa.nome');
 
-        $builder = $this->venda->orderBy($by, $order)->select('vendas.*');
-
-        /*
-         * Filtrar LIKE
-         */
-        if($this->request->get('like')){
-
-            $builder = $builder->where(function($q) {
-
-                $q->whereHas('cliente', function ($query) {
-
-                    $query->whereHas('pessoa', function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
-                        });
-                    });
-                });
-
-            });
-        }
-
-        /*
-         * Paginate
-         */
-        $vendas = $builder->paginate($this->request->get('limit', 15));
+        $vendas = $this->vendaRepository->order($by, $order)->whereLike($like)->paginate(15);
 
         return view('venda.index', compact('vendas'));
     }
 
     /**
-     * Exibe formulário para criação de venda
+     * Exibe uma lista de cliente para o usuário selecinonar e criar uma Venda
      *
-     * @param  Cliente $cliente
      * @return Response
      */
-    public function form(Cliente $cliente) {
-        /*
-         * Order
-         */
+    public function form() {
+
+        $like = $this->request->get('like');
         $order = $this->request->get('order', 'ASC');
         $by = $this->request->get('by', 'pessoa.nome');
 
-        $builder = $cliente->orderBy($by, $order)->select('clientes.*');
-
-
-        /*
-         * Filtrar LIKE
-         */
-        if($this->request->get('like')){
-
-            $builder = $builder->where(function($q) {
-
-                $q->whereHas('pessoa', function ($query) {
-                    $query->where(function($query){
-                        $query->where('nome', 'like', '%' . $this->request->get('like') . '%');
-                        $query->orWhere('razao_apelido', 'like', '%' . $this->request->get('like') . '%');
-                        $query->orWhere('documento', 'like', '%' . $this->request->get('like') . '%');
-                    });
-                });
-
-            });
-        }
-
-        /*
-         * Paginate
-         */
-        $clientes = $builder->paginate($this->request->get('limit', 15));
+        $clientes = $this->clienteRepository->order($by, $order)->whereLike($like)->paginate(15);
 
         return view('venda.form', compact('clientes'));
 

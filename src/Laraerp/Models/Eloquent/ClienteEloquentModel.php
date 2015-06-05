@@ -4,7 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 use Laraerp\Contracts\Models\ClienteModel;
 use Laraerp\Contracts\Models\PessoaModel;
 use Laraerp\Ordination\OrdinationTrait;
-use Laraerp\Tag\TagTrait;
+use Laraerp\TagTrait;
+
 
 class ClienteEloquentModel extends Model implements ClienteModel {
 
@@ -23,7 +24,7 @@ class ClienteEloquentModel extends Model implements ClienteModel {
      * Set identification
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\ClienteModel
      */
     public function setId($id)
     {

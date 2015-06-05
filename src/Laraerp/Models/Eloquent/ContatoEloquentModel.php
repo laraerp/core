@@ -5,63 +5,156 @@ namespace Laraerp\Models\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use JansenFelipe\Utils\Mask;
 use JansenFelipe\Utils\Utils;
+use Laraerp\Contracts\Models\ContatoModel;
+use Laraerp\Contracts\Models\PessoaModel;
 
-class ContatoEloquentModel extends Model {
+class ContatoEloquentModel extends Model implements ContatoModel {
 
     protected $table = 'contatos';
-
-    protected $fillable = ['pessoa_id', 'responsavel', 'telefone', 'celular', 'email'];
 
     /**
      * Belongs to Pessoa
      */
     public function pessoa() {
-        return $this->belongsTo('Laraerp\Pessoa');
+        return $this->belongsTo('Laraerp\Models\Eloquent\PessoaEloquentModel', 'pessoa_id', 'id');
+    }
+
+
+    /**
+     * Set identification
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
-     * Getters
+     * Set Pessoa
+     *
+     * @param \Laraerp\Contracts\Models\PessoaModel $pessoa
+     * @return \Laraerp\Contracts\Models\ContatoModel
      */
-    public function getPessoaId(){
-        return $this->pessoa_id;
+    public function setPessoa(PessoaModel $pessoa)
+    {
+        $this->pessoa_id = $pessoa->getId();
+
+        return $this;
     }
 
-    public function getResponsavel(){
+    /**
+     * Set Responsavel
+     *
+     * @param string $responsavel
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setResponsavel($responsavel)
+    {
+        $this->responsavel = $responsavel;
+
+        return $this;
+    }
+
+    /**
+     * Set Email
+     *
+     * @param string $email
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Set Telefone
+     *
+     * @param string $telefone
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setTelefone($telefone)
+    {
+        $this->telefone = Utils::unmask($telefone);
+
+        return $this;
+    }
+
+    /**
+     * Set Celular
+     *
+     * @param string $celular
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = Utils::unmask($celular);
+
+        return $this;
+    }
+
+    /**
+     * Get identification
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get Pessoa
+     *
+     * @return \Laraerp\Contracts\Models\PessoaModel
+     */
+    public function getPessoa()
+    {
+        return $this->pessoa;
+    }
+
+    /**
+     * Get Responsavel
+     *
+     * @return string
+     */
+    public function getResponsavel()
+    {
         return $this->responsavel;
     }
 
-    public function getTelefone(){
-        return Utils::mask($this->telefone, Mask::TELEFONE);
-    }
-
-    public function getCelular(){
-        return Utils::mask($this->celular, Mask::TELEFONE);
-    }
-
-    public function getEmail(){
+    /**
+     * Get Email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
-     * Setters
+     * Get Telefone
+     *
+     * @return string
      */
-    public function setPessoaId($pessoa_id){
-        $this->pessoa_id = $pessoa_id;
+    public function getTelefone()
+    {
+        return Utils::mask($this->telefone, Mask::TELEFONE);
     }
 
-    public function setResponsavel($responsavel){
-        $this->responsavel = $responsavel;
-    }
-
-    public function setTelefone($telefone){
-        $this->telefone = Utils::unmask($telefone);
-    }
-
-    public function setCelular($celular){
-        $this->celular = Utils::unmask($celular);
-    }
-
-    public function setEmail($email){
-        $this->email = $email;
+    /**
+     * Get Celular
+     *
+     * @return string
+     */
+    public function getCelular()
+    {
+        return Utils::mask($this->celular, Mask::TELEFONE);
     }
 }

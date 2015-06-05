@@ -19,13 +19,11 @@ class CreateVendasTable extends Migration {
             $table->integer('cliente_id')->nullable()->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes');
 
-            $table->integer('endereco_id')->nullable()->unsigned();
-            $table->foreign('endereco_id')->references('id')->on('enderecos');
+            $table->integer('endereco_entrega_id')->nullable()->unsigned();
+            $table->foreign('endereco_entrega_id')->references('id')->on('enderecos');
 
-            $table->float('valor_bruto');
-            $table->float('valor_desconto');
-            $table->float('valor_acrescimo');
-            $table->float('valor_liquido');
+            $table->float('valor_frete');
+            $table->float('valor_total');
 
 			$table->timestamps();
 		});

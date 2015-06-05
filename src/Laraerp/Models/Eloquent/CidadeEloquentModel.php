@@ -6,11 +6,13 @@ use Laraerp\Contracts\Models\CidadeModel;
 
 class CidadeEloquentModel extends Cidade implements CidadeModel {
 
+    protected $table = 'cidades';
+
     /**
      * Set identification
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\ClienteModel
      */
     public function setId($id)
     {

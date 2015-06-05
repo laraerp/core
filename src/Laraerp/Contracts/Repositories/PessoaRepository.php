@@ -1,20 +1,33 @@
 <?php namespace Laraerp\Contracts\Repositories;
 
-use Laraerp\Contracts\Models\PessoaModel;
-use Laraerp\Contracts\Repository;
-
-interface PessoaRepository extends Repository {
+interface PessoaRepository {
 
     /**
-     * Remover uma Pessoa do repositório
+     * Retorna uma Pessoa
      *
-     * @param \Laraerp\Contracts\Models\PessoaModel $pessoa
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\PessoaModel
+     */
+    public function getById($id);
+
+    /**
+     * Salva uma Pessoa no repositório
+     *
+     * @param array $params
+     * @return \Laraerp\Contracts\Models\PessoaModel
+     */
+    public function save(array $params);
+
+    /**
+     * Remove Pessoa do repositorio
+     *
+     * @param int $id
      * @return boolean
      */
-    public function remove(PessoaModel $pessoa);
+    public function remove($id);
 
     /**
-     * Pesquisa no repositorio uma pessoa com o documento informado.
+     * Pesquisa no repositorio uma pessoa pelo documento.
      *
      * @param string $documento
      * @return \Laraerp\Contracts\Models\PessoaModel

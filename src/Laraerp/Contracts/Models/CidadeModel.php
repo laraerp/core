@@ -1,8 +1,14 @@
 <?php namespace Laraerp\Contracts\Models;
 
-use Laraerp\Contracts\Model;
+interface CidadeModel{
 
-interface CidadeModel extends Model {
+    /**
+     * Set identification
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\CidadeModel
+     */
+    public function setId($id);
 
     /**
      * Set Nome
@@ -19,6 +25,13 @@ interface CidadeModel extends Model {
      * @return \Laraerp\Contracts\Models\CidadeModel
      */
     public function setUF($uf);
+
+    /**
+     * Get identification
+     *
+     * @return int
+     */
+    public function getId();
 
     /**
      * Get Nome

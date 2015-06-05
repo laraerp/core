@@ -37,7 +37,7 @@ class PessoaEloquentModel extends Model implements PessoaModel {
      * Set identification
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\PessoaModel
      */
     public function setId($id)
     {
@@ -170,5 +170,15 @@ class PessoaEloquentModel extends Model implements PessoaModel {
     public function getContatos()
     {
         return $this->contatos;
+    }
+
+    /**
+     * Get Cliente
+     *
+     * @return \Laraerp\Contracts\Models\ClienteModel
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
     }
 }

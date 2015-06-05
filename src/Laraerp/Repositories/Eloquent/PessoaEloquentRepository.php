@@ -1,5 +1,6 @@
 <?php namespace Laraerp\Repositories\Eloquent;
 
+use JansenFelipe\Utils\Utils;
 use Laraerp\Contracts\Models\PessoaModel;
 use Laraerp\Contracts\Repositories\PessoaRepository;
 
@@ -10,66 +11,24 @@ class PessoaEloquentRepository implements PessoaRepository{
         $this->pessoa = $pessoaModel;
     }
 
-
     /**
-     * Retrieve all data of repository
-     *
-     * @param array $columns
-     * @param null $limit
-     * @param null $offset
-     * @return \Illuminate\Support\Collection
-     */
-    public function all(array $columns = array('*'), $limit = null, $offset = null)
-    {
-        // TODO: Implement all() method.
-    }
-
-    /**
-     * Retrieve all data of repository, paginated
-     *
-     * @param null $limit
-     * @param array $columns
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function paginate($limit = null, array $columns = array('*'))
-    {
-        // TODO: Implement paginate() method.
-    }
-
-    /**
-     * Remover uma Pessoa do repositório
-     *
-     * @param \Laraerp\Contracts\Models\PessoaModel $pessoa
-     * @return boolean
-     */
-    public function remove(PessoaModel $pessoa)
-    {
-        // TODO: Implement remove() method.
-    }
-
-    /**
-     * Pesquisa no repositorio uma pessoa com o documento informado.
-     *
-     * @param string $documento
-     * @return \Laraerp\Contracts\Models\PessoaModel
-     */
-    public function getByDocumento($documento)
-    {
-        // TODO: Implement getByDocumento() method.
-    }
-
-    /**
-     * Save data in repository
+     * Salva uma Pessoa no repositório
      *
      * @param array $params
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\PessoaModel
      */
     public function save(array $params)
     {
         if(isset($params['id']) && $params['id']>0)
-            $this->pessoa = $this->pessoa->find($params['id']);
+            $this->pessoa = $this->getById($params['id']);
 
-        $this->pessoa->setDocumento($params['documento']);
+        $pessoa = $this->getByDocumento($params['documento']);
+
+        if(!is_null($pessoa))
+            $this->pessoa = $pessoa;
+        else
+            $this->pessoa->setDocumento($params['documento']);
+
         $this->pessoa->setNome($params['nome']);
 
         if(isset($params['razao_apelido']))
@@ -87,38 +46,34 @@ class PessoaEloquentRepository implements PessoaRepository{
     }
 
     /**
-     * Retrieve data of repository
-     *
-     * @param array $columns
-     * @param null $limit
-     * @param null $offset
-     * @return \Illuminate\Support\Collection
-     */
-    public function retrieve(array $columns = array('*'), $limit = null, $offset = null)
-    {
-        // TODO: Implement retrieve() method.
-    }
-
-    /**
-     * Remove a entity in repository
-     *
-     * @param null $by
-     * @param null $order
-     * @return \Laraerp\Contracts\Repository
-     */
-    public function order($by = null, $order = null)
-    {
-        // TODO: Implement order() method.
-    }
-
-    /**
      * Returns a specific model by identifier
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\PessoaModel
      */
     public function getById($id)
     {
-        // TODO: Implement getById() method.
+        return $this->pessoa->find($id);
+    }
+
+    /**
+     * Remove Pessoa do repositorio
+     *
+     * @param int $id
+     * @return boolean
+     */
+    public function remove($id){
+        return $this->getById($id)->delete();
+    }
+
+    /**
+     * Pesquisa no repositorio uma pessoa pelo documento.
+     *
+     * @param string $documento
+     * @return \Laraerp\Contracts\Models\PessoaModel
+     */
+    public function getByDocumento($documento)
+    {
+        return $this->pessoa->where(['documento' => Utils::unmask($documento)])->first();
     }
 }

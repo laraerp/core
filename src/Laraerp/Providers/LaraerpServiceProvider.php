@@ -2,6 +2,7 @@
 
 namespace Laraerp\Providers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
 
 class LaraerpServiceProvider extends ServiceProvider {
@@ -38,18 +39,31 @@ class LaraerpServiceProvider extends ServiceProvider {
     public function register() {
 
         /*
+         * View Composers
+         */
+        $this->app['view']->composers([
+            'Laraerp\Http\ViewComposers\TagsComposer' => ['cliente.index']
+        ]);
+
+        /*
          * Binding Repositories
          */
         $this->app->bind('Laraerp\Contracts\Repositories\PessoaRepository', 'Laraerp\Repositories\Eloquent\PessoaEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\EnderecoRepository', 'Laraerp\Repositories\Eloquent\EnderecoEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\CidadeRepository', 'Laraerp\Repositories\Eloquent\CidadeEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\ContatoRepository', 'Laraerp\Repositories\Eloquent\ContatoEloquentRepository');
         $this->app->bind('Laraerp\Contracts\Repositories\ClienteRepository', 'Laraerp\Repositories\Eloquent\ClienteEloquentRepository');
+        $this->app->bind('Laraerp\Contracts\Repositories\VendaRepository', 'Laraerp\Repositories\Eloquent\VendaEloquentRepository');
 
         /*
          * Binding Models
          */
         $this->app->bind('Laraerp\Contracts\Models\PessoaModel', 'Laraerp\Models\Eloquent\PessoaEloquentModel');
-        $this->app->bind('Laraerp\Contracts\Models\ClienteModel', 'Laraerp\Models\Eloquent\ClienteEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\EnderecoModel', 'Laraerp\Models\Eloquent\EnderecoEloquentModel');
         $this->app->bind('Laraerp\Contracts\Models\CidadeModel', 'Laraerp\Models\Eloquent\CidadeEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\ContatoModel', 'Laraerp\Models\Eloquent\ContatoEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\ClienteModel', 'Laraerp\Models\Eloquent\ClienteEloquentModel');
+        $this->app->bind('Laraerp\Contracts\Models\VendaModel', 'Laraerp\Models\Eloquent\VendaEloquentModel');
 
         /*
          * Artesaos

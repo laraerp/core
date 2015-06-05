@@ -22,50 +22,10 @@ class EnderecoEloquentRepository implements EnderecoRepository{
     }
 
     /**
-     * Retrieve data of repository
-     *
-     * @param array $columns
-     * @param null $limit
-     * @param null $offset
-     * @return \Illuminate\Support\Collection
-     */
-    public function retrieve(array $columns = array('*'), $limit = null, $offset = null)
-    {
-        return $this->endereco->get();
-    }
-
-    /**
-     * Retrieve all data of repository, paginated
-     *
-     * @param null $limit
-     * @param array $columns
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function paginate($limit = null, array $columns = array('*'))
-    {
-        return $this->endereco->paginate($limit, $columns);
-    }
-
-    /**
-     * Remove a entity in repository
-     *
-     * @param null $by
-     * @param null $order
-     * @return \Laraerp\Contracts\Repository
-     */
-    public function order($by = null, $order = null)
-    {
-        if(!is_null($by))
-            $this->endereco = $this->endereco->orderBy($by, $order);
-
-        return $this;
-    }
-
-    /**
      * Returns a specific model by identifier
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\EnderecoModel
      */
     public function getById($id)
     {
@@ -76,7 +36,7 @@ class EnderecoEloquentRepository implements EnderecoRepository{
      * Save data in repository
      *
      * @param array $params
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\EnderecoModel
      */
     public function save(array $params)
     {
@@ -109,5 +69,16 @@ class EnderecoEloquentRepository implements EnderecoRepository{
         $this->endereco->save();
 
         return $this->endereco;
+    }
+
+    /**
+     * Remove Endereço do repositorio
+     *
+     * @param int $id
+     * @return boolean
+     */
+    public function remove($id)
+    {
+        return $this->getById($id)->delete();
     }
 }

@@ -1,9 +1,15 @@
 <?php namespace Laraerp\Contracts\Models;
 
-use Carbon\Carbon;
-use Laraerp\Contracts\Model;
 
-interface EnderecoModel extends Model {
+interface EnderecoModel {
+
+    /**
+     * Set identification
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\ContatoModel
+     */
+    public function setId($id);
 
     /**
      * Set Pessoa
@@ -60,6 +66,13 @@ interface EnderecoModel extends Model {
      * @return \Laraerp\Contracts\Models\EnderecoModel
      */
     public function setCidade($cidade);
+
+    /**
+     * Get identification
+     *
+     * @return int
+     */
+    public function getId();
 
     /**
      * Get Pessoa

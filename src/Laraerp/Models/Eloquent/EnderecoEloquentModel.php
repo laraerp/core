@@ -23,7 +23,7 @@ class EnderecoEloquentModel extends Model implements EnderecoModel {
      * Belongs to Cidade
      */
     public function cidade() {
-        return $this->belongsTo('Laraerp\Models\Eloquent\CidadeEloquentModel', 'pessoa_id', 'id');
+        return $this->belongsTo('Laraerp\Models\Eloquent\CidadeEloquentModel', 'cidade_id', 'id');
     }
 
     /**
@@ -37,7 +37,7 @@ class EnderecoEloquentModel extends Model implements EnderecoModel {
             $endereco .= ' ' . $this->getComplemento();
 
         $endereco .= ' - ' . $this->getBairro() . ' - CEP ' . $this->getCep() . ' - ';
-        $endereco .= $this->cidade->nome . '/' . $this->cidade->uf;
+        $endereco .= $this->getCidade()->getNome() . '/' . $this->getCidade()->getUF();
 
         return $endereco;
     }
@@ -46,7 +46,7 @@ class EnderecoEloquentModel extends Model implements EnderecoModel {
      * Set identification
      *
      * @param int $id
-     * @return \Laraerp\Contracts\Model
+     * @return \Laraerp\Contracts\Models\EnderecoModel
      */
     public function setId($id)
     {

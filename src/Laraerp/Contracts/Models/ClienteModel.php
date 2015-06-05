@@ -1,9 +1,14 @@
 <?php namespace Laraerp\Contracts\Models;
 
-use Carbon\Carbon;
-use Laraerp\Contracts\Model;
+interface ClienteModel {
 
-interface ClienteModel extends Model {
+    /**
+     * Set identification
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\ClienteModel
+     */
+    public function setId($id);
 
     /**
      * Set Pessoa
@@ -36,6 +41,13 @@ interface ClienteModel extends Model {
      * @return \Laraerp\Contracts\Models\ClienteModel
      */
     public function setRetemIssqn($retem_issqn);
+
+    /**
+     * Get identification
+     *
+     * @return int
+     */
+    public function getId();
 
     /**
      * Get Pessoa

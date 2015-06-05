@@ -1,7 +1,5 @@
 <?php namespace Laraerp\Contracts\Repositories;
 
-use Laraerp\Contracts\Repository;
-
-interface VendaItemRepository extends Repository {
+interface VendaItemRepository {
 
 }

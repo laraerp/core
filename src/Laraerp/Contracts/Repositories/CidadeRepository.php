@@ -1,7 +1,13 @@
 <?php namespace Laraerp\Contracts\Repositories;
 
-use Laraerp\Contracts\Repository;
 
-interface CidadeRepository extends Repository {
+interface CidadeRepository{
 
+    /**
+     * Retorna uma cidade
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\CidadeModel
+     */
+    public function getById($id);
 }
