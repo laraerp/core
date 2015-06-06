@@ -54,7 +54,7 @@ class SetupController extends MainController {
         $this->contatoRepository->save($contato);
 
 
-        return redirect(route('setup'));
+        return redirect(route('setup.index'));
     }
 
 }
