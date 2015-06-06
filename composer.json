@@ -9,7 +9,7 @@
         "jansenfelipe/cnpj-gratis": "2.0.*@dev",
         "jansenfelipe/cpf-gratis": "2.0.*@dev",
         "jansenfelipe/cep-gratis": "2.0.*@dev",
-        "jansenfelipe/nfephp-serialize": "dev-master",
+        "jansenfelipe/nfephp-serialize": "1.0.*",
         "artesaos/cidadesbr": "1.0.*",
         "laraerp/correios": "1.0.*",
         "laraerp/unidades-medida": "1.0.*",
