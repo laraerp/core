@@ -74,6 +74,40 @@ class VendaEloquentModel extends Model implements VendaModel{
     }
 
     /**
+     * Set data da venda
+     *
+     * @param mixed
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setData($data)
+    {
+        try{
+            $this->data = Carbon::createFromFormat('d/m/Y', $data);
+        }catch (Exception $e){
+            throw new Exception('Informe a data no formato DD/MM/YYYY');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set data da entrega
+     *
+     * @param mixed
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setDataEntrega($data_entrega)
+    {
+        try{
+            $this->data_entrega = Carbon::createFromFormat('d/m/Y', $data_entrega);
+        }catch (Exception $e){
+            throw new Exception('Informe a data no formato DD/MM/YYYY');
+        }
+
+        return $this;
+    }
+
+    /**
      * Set Valor Frete
      *
      * @param int $valor_frete
@@ -95,6 +129,19 @@ class VendaEloquentModel extends Model implements VendaModel{
     public function setValorTotal($valor_total)
     {
         $this->valor_total = Utils::unmoeda($valor_total);
+
+        return $this;
+    }
+
+    /**
+     * Set Valor Pago
+     *
+     * @param int $valor_pago
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setValorPago($valor_pago)
+    {
+        $this->valor_pago = Utils::unmoeda($valor_pago);
 
         return $this;
     }
@@ -131,6 +178,26 @@ class VendaEloquentModel extends Model implements VendaModel{
     }
 
     /**
+     * Get data da venda
+     *
+     * @return \Carbon\Carbon
+     */
+    public function getData()
+    {
+        return !is_null($this->data) ? $this->data->format('d/m/Y') : null;
+    }
+
+    /**
+     * Get data da entrega
+     *
+     * @return \Carbon\Carbon
+     */
+    public function getDataEntrega()
+    {
+        return !is_null($this->valor_pago) ? $this->valor_pago->format('d/m/Y') : null;
+    }
+
+    /**
      * Get Valor Frete
      *
      * @param boolean $withFormat
@@ -150,6 +217,17 @@ class VendaEloquentModel extends Model implements VendaModel{
     public function getValorTotal($withFormat = true)
     {
         return $withFormat ? Utils::moeda($this->valor_total) : $this->valor_total;
+    }
+
+    /**
+     * Get Valor Pago
+     *
+     * @param boolean $withFormat
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function getValorPago($withFormat = true)
+    {
+        return $withFormat ? Utils::moeda($this->valor_pago) : $this->valor_pago;
     }
 
     /**

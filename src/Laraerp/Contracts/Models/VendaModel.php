@@ -27,6 +27,22 @@ interface VendaModel {
     public function setEnderecoEntrega(EnderecoModel $endereco);
 
     /**
+     * Set data da venda
+     *
+     * @param mixed
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setData($data);
+
+    /**
+     * Set data da entrega
+     *
+     * @param mixed
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setDataEntrega($data_entrega);
+
+    /**
      * Set Valor Frete
      *
      * @param int $valor_frete
@@ -41,6 +57,14 @@ interface VendaModel {
      * @return \Laraerp\Contracts\Models\VendaModel
      */
     public function setValorTotal($valor_total);
+
+    /**
+     * Set Valor Pago
+     *
+     * @param int $valor_pago
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function setValorPago($valor_pago);
 
     /**
      * Get identification
@@ -65,6 +89,20 @@ interface VendaModel {
     public function getEnderecoEntrega();
 
     /**
+     * Get data da venda
+     *
+     * @return \Carbon\Carbon
+     */
+    public function getData();
+
+    /**
+     * Get data da entrega
+     *
+     * @return \Carbon\Carbon
+     */
+    public function getDataEntrega();
+
+    /**
      * Get Valor Frete
      *
      * @param boolean $withFormat
@@ -79,6 +117,14 @@ interface VendaModel {
      * @return \Laraerp\Contracts\Models\VendaModel
      */
     public function getValorTotal($withFormat = true);
+
+    /**
+     * Get Valor Pago
+     *
+     * @param boolean $withFormat
+     * @return \Laraerp\Contracts\Models\VendaModel
+     */
+    public function getValorPago($withFormat = true);
 
     /**
      * Get Vendas Item
