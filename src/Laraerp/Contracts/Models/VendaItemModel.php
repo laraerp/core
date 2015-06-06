@@ -142,29 +142,33 @@ interface VendaItemModel {
     /**
      * Get Valor Unitário
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorUnitario();
+    public function getValorUnitario($withFormat = true);
 
     /**
      * Get Valor Desconto
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorDesconto();
+    public function getValorDesconto($withFormat = true);
 
     /**
      * Get Valor Acrescimo
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorAcrescimo();
+    public function getValorAcrescimo($withFormat = true);
 
     /**
      * Get Valor Total
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorTotal();
+    public function getValorTotal($withFormat = true);
 
 }

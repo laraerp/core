@@ -45,9 +45,10 @@ interface VendaModel {
     /**
      * Get identification
      *
+     * @param boolean $withFormat
      * @return int
      */
-    public function getId();
+    public function getId($withFormat = true);
 
     /**
      * Get Pessoa
@@ -66,16 +67,18 @@ interface VendaModel {
     /**
      * Get Valor Frete
      *
+     * @param boolean $withFormat
      * @return \Laraerp\Contracts\Models\VendaModel
      */
-    public function getValorFrete();
+    public function getValorFrete($withFormat = true);
 
     /**
      * Get Valor Total
      *
+     * @param boolean $withFormat
      * @return \Laraerp\Contracts\Models\VendaModel
      */
-    public function getValorTotal();
+    public function getValorTotal($withFormat = true);
 
     /**
      * Get Vendas Item

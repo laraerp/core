@@ -117,6 +117,11 @@ class ClienteEloquentRepository implements ClienteRepository{
          * Se não encontrar, tenta criar uma
          */
         if(!is_null($pessoa)){
+
+            //Salvando dados
+            $params['id'] = $pessoa->getId();
+            $this->pessoaRepository->save($params);
+
             $cliente = $pessoa->getCliente();
 
             /*

@@ -3,6 +3,14 @@
 interface VendaItemRepository {
 
     /**
+     * Retorna um Item de Venda
+     *
+     * @param int $id
+     * @return \Laraerp\Contracts\Models\VendaItemModel
+     */
+    public function getById($id);
+
+    /**
      * Salva um Item de Venda no repositório
      *
      * @param array $params

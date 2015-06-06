@@ -102,11 +102,12 @@ class VendaEloquentModel extends Model implements VendaModel{
     /**
      * Get identification
      *
+     * @param boolean $withFormat
      * @return int
      */
-    public function getId()
+    public function getId($withFormat = false)
     {
-        return $this->id;
+        return $withFormat ? str_pad($this->id, 4, '0', STR_PAD_LEFT) : $this->id;
     }
 
     /**
@@ -132,21 +133,23 @@ class VendaEloquentModel extends Model implements VendaModel{
     /**
      * Get Valor Frete
      *
+     * @param boolean $withFormat
      * @return \Laraerp\Contracts\Models\VendaModel
      */
-    public function getValorFrete()
+    public function getValorFrete($withFormat = true)
     {
-        return Utils::moeda($this->valor_frete);
+        return $withFormat ? Utils::moeda($this->valor_frete) : $this->valor_frete;
     }
 
     /**
      * Get Valor Total
      *
+     * @param boolean $withFormat
      * @return \Laraerp\Contracts\Models\VendaModel
      */
-    public function getValorTotal()
+    public function getValorTotal($withFormat = true)
     {
-        return Utils::moeda($this->valor_total);
+        return $withFormat ? Utils::moeda($this->valor_total) : $this->valor_total;
     }
 
     /**

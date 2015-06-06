@@ -99,4 +99,11 @@ interface PessoaModel{
      */
     public function getCliente();
 
+    /**
+     * Get Empresa
+     *
+     * @return \Laraerp\Contracts\Models\EmpresaModel
+     */
+    public function getEmpresa();
+
 }

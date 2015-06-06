@@ -14,6 +14,13 @@ class PessoaEloquentModel extends Model implements PessoaModel {
     protected $dates = ['nascimento_fundacao', 'created_at', 'updated_at'];
 
     /**
+     * HasOne to Empresa
+     */
+    public function empresa() {
+        return $this->hasOne('Laraerp\Models\Eloquent\EmpresaEloquentModel', 'pessoa_id', 'id');
+    }
+
+    /**
      * HasOne to Cliente
      */
     public function cliente() {
@@ -181,5 +188,15 @@ class PessoaEloquentModel extends Model implements PessoaModel {
     public function getCliente()
     {
         return $this->cliente;
+    }
+
+    /**
+     * Get Empresa
+     *
+     * @return \Laraerp\Contracts\Models\EmpresaModel
+     */
+    public function getEmpresa()
+    {
+        return $this->empresa;
     }
 }

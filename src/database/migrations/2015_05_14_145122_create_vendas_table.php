@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -22,8 +23,15 @@ class CreateVendasTable extends Migration {
             $table->integer('endereco_entrega_id')->nullable()->unsigned();
             $table->foreign('endereco_entrega_id')->references('id')->on('enderecos');
 
-            $table->float('valor_frete');
-            $table->float('valor_total');
+            $table->date('data')->default(Carbon::now());
+
+            $table->date('data_entrega')->nullable();
+
+            $table->float('valor_frete')->default(0);
+            $table->float('valor_total')->default(0);
+            $table->float('valor_pago')->default(0);
+
+            $table->text('observacoes')->nullable();
 
 			$table->timestamps();
 		});

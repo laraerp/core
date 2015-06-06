@@ -108,6 +108,21 @@ class VendaEloquentRepository implements VendaRepository{
         if(isset($params['endereco_id']))
             $this->venda->setEnderecoEntrega($this->enderecoRepository->getById($params['endereco_entrega_id']));
 
+        if(isset($params['valor_frete']))
+            $this->venda->setValorFrete($params['valor_frete']);
+
+        /*
+         * Calculando total
+         */
+        $total = 0;
+
+        foreach($this->venda->getVendasItens() as $item)
+            $total += $item->getValorTotal(false);
+
+        $total += $this->venda->getValorFrete(false);
+
+        $this->venda->setValorTotal($total);
+
         /*
          * Salvando
          */

@@ -131,7 +131,7 @@ class VendaItemEloquentModel extends Model implements VendaItemModel {
      */
     public function setValorUnitario($valorUnitario)
     {
-        $this->valorUnitario =  Utils::unmoeda($valorUnitario);
+        $this->valor_unitario =  Utils::unmoeda($valorUnitario);
 
         return $this;
     }
@@ -144,7 +144,7 @@ class VendaItemEloquentModel extends Model implements VendaItemModel {
      */
     public function setValorDesconto($valorDesconto)
     {
-        $this->valorDesconto =  Utils::unmoeda($valorDesconto);
+        $this->valor_desconto =  Utils::unmoeda($valorDesconto);
 
         return $this;
     }
@@ -157,7 +157,7 @@ class VendaItemEloquentModel extends Model implements VendaItemModel {
      */
     public function setValorAcrescimo($valorAcrescimo)
     {
-        $this->valorAcrescimo =  Utils::unmoeda($valorAcrescimo);
+        $this->valor_acrescimo =  Utils::unmoeda($valorAcrescimo);
 
         return $this;
     }
@@ -170,7 +170,7 @@ class VendaItemEloquentModel extends Model implements VendaItemModel {
      */
     public function setValorTotal($valorTotal)
     {
-        $this->valorTotal =  Utils::unmoeda($valorTotal);
+        $this->valor_total =  Utils::unmoeda($valorTotal);
 
         return $this;
     }
@@ -242,46 +242,50 @@ class VendaItemEloquentModel extends Model implements VendaItemModel {
      */
     public function getQuantidade()
     {
-        return $this->quantidade;
+        return $this->quantidade + 0;
     }
 
     /**
      * Get Valor Unitário
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorUnitario()
+    public function getValorUnitario($withFormat = true)
     {
-        return Utils::moeda($this->valorUnitario);
+        return $withFormat ? Utils::moeda($this->valor_unitario) : $this->valor_unitario;
     }
 
     /**
      * Get Valor Desconto
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorDesconto()
+    public function getValorDesconto($withFormat = true)
     {
-        return Utils::moeda($this->valorDesconto);
+        return $withFormat ? Utils::moeda($this->valor_desconto) : $this->valor_desconto;
     }
 
     /**
      * Get Valor Acrescimo
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorAcrescimo()
+    public function getValorAcrescimo($withFormat = true)
     {
-        return Utils::moeda($this->valorAcrescimo);
+        return $withFormat ? Utils::moeda($this->valor_acrescimo) : $this->valor_acrescimo;
     }
 
     /**
      * Get Valor Total
      *
+     * @param boolean $withFormat
      * @return string
      */
-    public function getValorTotal()
+    public function getValorTotal($withFormat = true)
     {
-        return Utils::moeda($this->valorTotal);
+        return $withFormat ? Utils::moeda($this->valor_total) : $this->valor_total;
     }
 }

@@ -3,14 +3,6 @@
 class ClienteSalvarRequest extends Request {
 
     /**
-     * The URI to redirect to if validation fails
-     *
-     * @var string
-     */
-    protected $redirect = 'cliente/form';
-
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

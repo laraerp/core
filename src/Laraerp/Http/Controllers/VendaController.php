@@ -112,7 +112,7 @@ class VendaController extends MainController {
      * @param  int $idVenda
      * @return Response
      */
-    public function adicionarItem($idVenda) {
+    public function formAdicionarItem($idVenda) {
         try{
             $venda = $this->vendaRepository->getById($idVenda);
 
