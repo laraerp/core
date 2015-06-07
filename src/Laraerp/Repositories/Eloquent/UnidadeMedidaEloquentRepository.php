@@ -20,4 +20,31 @@ class UnidadeMedidaEloquentRepository implements UnidadeMedidaRepository{
     {
         return $this->unidadeMedida->find($id);
     }
+
+    /**
+     * Aplica ordenação
+     *
+     * @param null $by
+     * @param null $order
+     * @return \Laraerp\Contracts\Repositories\UnidadeMedidaModel
+     */
+    public function order($by = null, $order = null)
+    {
+        if(!is_null($by))
+            $this->unidadeMedida = $this->unidadeMedida->orderBy($by, $order);
+
+        return $this;
+    }
+
+    /**
+     * Retorna registros do repositório
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function all()
+    {
+        return $this->unidadeMedida->get();
+    }
+
+
 }
