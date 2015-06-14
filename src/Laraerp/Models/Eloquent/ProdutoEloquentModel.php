@@ -4,10 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 use Laraerp\Contracts\Models\ProdutoModel;
 use Laraerp\Contracts\Models\UnidadeModel;
 use Laraerp\Ordination\OrdinationTrait;
+use Laraerp\TagTrait;
 
 class ProdutoEloquentModel extends Model implements ProdutoModel {
 
-    use OrdinationTrait;
+    use OrdinationTrait, TagTrait;
 
     protected $table = 'produtos';
 
