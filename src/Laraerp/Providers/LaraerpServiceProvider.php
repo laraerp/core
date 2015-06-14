@@ -42,7 +42,7 @@ class LaraerpServiceProvider extends ServiceProvider {
          * View Composers
          */
         $this->app['view']->composers([
-            'Laraerp\Http\ViewComposers\TagsComposer' => ['cliente.index']
+            'Laraerp\Http\ViewComposers\TagsComposer' => ['cliente.index', 'produto.index']
         ]);
 
         /*
