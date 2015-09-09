@@ -25,7 +25,7 @@ class CreateFaturasTable extends Migration
 
             $table->string('tipo')->nullable();
             $table->text('numero');
-            $table->date('data')->default(0);
+            $table->date('data');
             $table->float('valor')->default(0);
             $table->date('data_pagamento')->nullable();
             $table->float('valor_pago')->default(0);
