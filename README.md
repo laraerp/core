@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/laraerp/core.svg?branch=develop)](https://travis-ci.org/laraerp/core)
 [![MIT license](https://img.shields.io/dub/l/vibe-d.svg)](http://opensource.org/licenses/MIT)
 
-ERP brasileiro de código fonte aberto escrito sob o Laravel Framework
+ERP brasileiro de código fonte aberto escrito sob o Laravel Framework.
 
 # License
 
