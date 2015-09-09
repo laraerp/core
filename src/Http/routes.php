@@ -1,5 +1,33 @@
 <?php
 
+/*
+ * Auth
+ */
+Route::group(['namespace' => '\App\Http\Controllers\Auth'], function() {
+    Route::get('auth/login', ['as' => 'auth.form', 'uses' => 'AuthController@getLogin']);
+    Route::post('auth/login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
+    Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
+});
+
+/*
+ * Autenticado e não configurado
+ */
+Route::group(['middleware' => ['auth'], 'namespace' => '\Laraerp\Http\Controllers'], function() {
+
+    //Setup
+    Route::get('setup', ['as' => 'setup.index', 'uses' => 'SetupController@index']);
+    Route::post('setup/salvar', ['as' => 'setup.salvar', 'uses' => 'SetupController@salvar']);
+
+    //Util
+    Route::get('util/ufs', ['as' => 'util.ufs', 'uses' => 'UtilController@ufs']);
+    Route::get('util/cidades/{uf}', ['as' => 'util.ufs', 'uses' => 'UtilController@cidades']);
+    Route::get('util/cep/{cep}', ['as' => 'util.cep', 'uses' => 'UtilController@cep']);
+    Route::post('util/parametrosReceita', ['as' => 'util.parametrosReceita', 'uses' => 'UtilController@parametrosReceita']);
+});
+
+/*
+ * Autenticado e configurado
+ */
 Route::group(['middleware' => ['auth', 'setup'], 'namespace' => '\Laraerp\Http\Controllers'], function() {
 
     //Compra
@@ -62,26 +90,14 @@ Route::group(['middleware' => ['auth', 'setup'], 'namespace' => '\Laraerp\Http\C
     //Configuracoes
     Route::get('configuracoes', ['as' => 'configuracoes.index', 'uses' => 'ConfiguracoesController@index']);
 
+    //Util
+    Route::post('util/consultaReceita', ['as' => 'util.consultaReceita', 'uses' => 'UtilController@consultaReceita']);
+    Route::get('util/fornecedores', ['as' => 'util.fornecedores', 'uses' => 'UtilController@fornecedores']);
+    Route::get('util/produtos', ['as' => 'util.produtos', 'uses' => 'UtilController@produtos']);
+
     //Home
     Route::get('/', ['as' => 'home', function () {
         return redirect()->route('dashboard.index');
     }]);
-
-});
-
-Route::group(['middleware' => ['auth'], 'namespace' => '\Laraerp\Http\Controllers'], function() {
-
-    //Setup
-    Route::get('setup', ['as' => 'setup.index', 'uses' => 'SetupController@index']);
-    Route::post('setup/salvar', ['as' => 'setup.salvar', 'uses' => 'SetupController@salvar']);
-
-    //Util
-    Route::get('util/ufs', ['as' => 'util.ufs', 'uses' => 'UtilController@ufs']);
-    Route::get('util/cidades/{uf}', ['as' => 'util.ufs', 'uses' => 'UtilController@cidades']);
-    Route::get('util/cep/{cep}', ['as' => 'util.cep', 'uses' => 'UtilController@cep']);
-    Route::post('util/parametrosReceita', ['as' => 'util.parametrosReceita', 'uses' => 'UtilController@parametrosReceita']);
-    Route::post('util/consultaReceita', ['as' => 'util.consultaReceita', 'uses' => 'UtilController@consultaReceita']);
-    Route::get('util/fornecedores', ['as' => 'util.fornecedores', 'uses' => 'UtilController@fornecedores']);
-    Route::get('util/produtos', ['as' => 'util.produtos', 'uses' => 'UtilController@produtos']);
 
 });
