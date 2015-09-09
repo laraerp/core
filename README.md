@@ -31,10 +31,11 @@ $ php artisan vendor:publish
 $ composer dump-auto
 ```
 
-Rode as migrations e os seeds
+Execute os comandos para criar e popular as tabelas:
 
 ```shell
-$ php artisan migrate --seed
+$ php artisan migrate
+$ php artisan db:seed --class="LaraerpSeeder"
 ```
 
 # Template
