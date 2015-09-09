@@ -5,6 +5,44 @@
 
 ERP brasileiro de código fonte aberto escrito sob o Laravel Framework.
 
+# Instalação
+
+Adicione o núcleo do Laraerp utilizando o Composer:
+
+```shell
+$ composer require laraerp/core
+```
+
+Registre o ServiceProvider no arquivo `app/config.php`:
+
+```php
+// file START ommited
+    'providers' => [
+        // other providers ommited
+        \Laraerp\Providers\LaraerpServiceProvider::class,
+    ],
+// file END ommited
+```
+
+Publique os arquivos necessários para o funcionamento do núcleo:
+
+```shell
+$ php artisan vendor:publish
+$ composer dump-auto
+```
+
+Rode as migrations e os seeds
+
+```shell
+$ php artisan migrate --seed
+```
+
+# Template
+
+A instalação do core não contempla o template. Você pode utilizar o template default do Laraerp:
+
+[http://github.com/laraerp/template](http://github.com/laraerp/template)
+
 # License
 
 The MIT License (MIT)
