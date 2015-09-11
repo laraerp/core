@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => '\Laraerp\Http\Controller
     Route::get('util/cidades/{uf}', ['as' => 'util.ufs', 'uses' => 'UtilController@cidades']);
     Route::get('util/cep/{cep}', ['as' => 'util.cep', 'uses' => 'UtilController@cep']);
     Route::post('util/parametrosReceita', ['as' => 'util.parametrosReceita', 'uses' => 'UtilController@parametrosReceita']);
+    Route::post('util/consultaReceita', ['as' => 'util.consultaReceita', 'uses' => 'UtilController@consultaReceita']);
 });
 
 /*
@@ -91,7 +92,6 @@ Route::group(['middleware' => ['auth', 'setup'], 'namespace' => '\Laraerp\Http\C
     Route::get('configuracoes', ['as' => 'configuracoes.index', 'uses' => 'ConfiguracoesController@index']);
 
     //Util
-    Route::post('util/consultaReceita', ['as' => 'util.consultaReceita', 'uses' => 'UtilController@consultaReceita']);
     Route::get('util/fornecedores', ['as' => 'util.fornecedores', 'uses' => 'UtilController@fornecedores']);
     Route::get('util/produtos', ['as' => 'util.produtos', 'uses' => 'UtilController@produtos']);
 
