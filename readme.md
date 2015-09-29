@@ -1,7 +1,7 @@
 # Laraerp
 
 [![Build Status](https://travis-ci.org/laraerp/core.svg?branch=develop)](https://travis-ci.org/laraerp/core)
-[![MIT license](https://poser.pugx.org/jansenfelipe/nfephp-serialize/license.svg)](http://opensource.org/licenses/MIT)
+[![Latest Stable Version](https://poser.pugx.org/laraerp/core/v/stable)](https://packagist.org/packages/laraerp/core) [![Total Downloads](https://poser.pugx.org/laraerp/core/downloads)](https://packagist.org/packages/laraerp/core) [![Latest Unstable Version](https://poser.pugx.org/laraerp/core/v/unstable)](https://packagist.org/packages/laraerp/core) [![License](https://poser.pugx.org/laraerp/core/license)](https://packagist.org/packages/laraerp/core)
 
 ERP brasileiro de código fonte aberto escrito sob o Laravel Framework.
 
